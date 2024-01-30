@@ -7,21 +7,7 @@ import csv
 from typing import List
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Return a tuple of size two containing a start index and an end index
-    corresponding to the range of indexes to return in a list for pagination.
-
-    Parameters:
-    - page: The current page number (1-indexed).
-    - page_size: The number of items per page.
-
-    Returns:
-    A tuple (start_index, end_index).
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
@@ -54,13 +40,13 @@ class Server:
         Returns:
         A list of rows for the specified page.
         """
-        assert type(page) == int and type(page_size) == int
-        assert page > 0 and page_size > 0
-
-        start_index, end_index = index_range(page, page_size)
-        data = self.dataset()
-
-        if start_index >= len(data):
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
+        dataset = self.dataset()
+        start, end = index_range(page, page_size)
+        if (end > len(dataset)):
             return []
-
-        return data[start_index:end_index]
+        pageList = []
+        for page in range(start, end):
+            pageList.append(dataset[page])
+        return pageList
