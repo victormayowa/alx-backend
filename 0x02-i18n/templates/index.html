@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ g.lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Welcome to Holberton') }}</title>
+</head>
+<body>
+    <h1>{{ _('Hello world!') }}</h1>
+    {% if g.user %}
+        <p>{{ _('You are logged in as %(username)s.', username=g.user['name']) }}</p>
+    {% else %}
+        <p>{{ _('You are not logged in.') }}</p>
+    {% endif %}
+    {% if g.current_time %}
+        <p>{{ _('The current time is %(current_time)s.', current_time=g.current_time) }}</p>
+    {% endif %}
+</body>
+</html>
