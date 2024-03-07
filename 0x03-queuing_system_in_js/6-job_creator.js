@@ -1,12 +1,12 @@
 import kue from 'kue';
 
-const queue = kue.createQueue();
-const job_data = {
+const que = kue.createQueue();
+const data = {
     phoneNumber: '014567822',
     message: 'A new message',
 };
 
-const create_job = queue.create('push_notification_code', job_data).save(error => {
+const create_job = que.create('push_notification_code', data).save(error => {
   if (!error) {
     console.log(`Notification job created: ${create_job.id}`);
   }
